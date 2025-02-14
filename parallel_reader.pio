@@ -1,0 +1,8 @@
+.program parallel_reader
+.side_set 1
+
+; Read 8 bits from the parallel input and push to the RX FIFO
+loop:
+    in pins, 8       side 0
+    push block       side 1
+    jmp loop
