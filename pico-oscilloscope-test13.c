@@ -34,8 +34,21 @@ void init_dma(uint dma_chan, PIO pio, uint sm) {
 
 int main() {
     stdio_init_all();
+    // blink led on and off
+    gpio_init(PICO_DEFAULT_LED_PIN);
+    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+    for (int i = 0; i < 5; i++) {
+        gpio_put(PICO_DEFAULT_LED_PIN, 1);
+        sleep_ms(250);
+        gpio_put(PICO_DEFAULT_LED_PIN, 0);
+        sleep_ms(250);
+    }
     sleep_ms(5000);  // Wait 5 seconds before starting
-    
+    for (int i = 6; i > 0; i--) {
+        printf("Starting in %d seconds...\n", i);
+        sleep_ms(1000);
+    }
+
     PIO pio = pio0;
     uint sm = 0;
     uint offset = pio_add_program(pio, &parallel_reader_program);
@@ -47,7 +60,12 @@ int main() {
     pio_sm_set_enabled(pio, sm, false);
     
     // Send back collected data via USB
-    printf("done");
+    // countdown s
+    for (int i = 5; i > 0; i--) {
+        printf("Sending in %d seconds...\n", i);
+        sleep_ms(1000);
+    }
+    printf("Sending data...\n");
     for (int i = 0; i < NUM_SAMPLES; i++) {
         printf("%d\n", buffer[i]);
     }

@@ -46,7 +46,7 @@ pico_generate_pio_header(pico-oscilloscope-test13 ${CMAKE_CURRENT_LIST_DIR}/para
 
 # Enable/disable USB and UART output
 pico_enable_stdio_uart(pico-oscilloscope-test13 0)
-pico_enable_stdio_usb(pico-oscilloscope-test13 0)
+pico_enable_stdio_usb(pico-oscilloscope-test13 1)
 
 # Link standard libraries
 target_link_libraries(pico-oscilloscope-test13
