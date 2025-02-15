@@ -5,7 +5,7 @@
 #include "parallel_reader.pio.h"  // PIO assembly will be compiled into this header
 #include <stdio.h>  // Include stdio.h for printf
 
-#define SAMPLE_RATE 2000
+#define SAMPLE_RATE 18000000 // for some reason 16mhz gives a real 6mhz i think its because its /3 not 2 because jmp counts as an instruction
 #define NUM_SAMPLES 1000
 
 uint8_t buffer[NUM_SAMPLES];
@@ -33,7 +33,9 @@ void init_dma(uint dma_chan, PIO pio, uint sm) {
 }
 
 int main() {
+    set_sys_clock_khz(200000, true);
     stdio_init_all();
+    
     // blink led on and off
     gpio_init(PICO_DEFAULT_LED_PIN);
     gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
@@ -48,6 +50,9 @@ int main() {
         printf("Starting in %d seconds...\n", i);
         sleep_ms(1000);
     }
+
+    // set clock to 200mhz
+    
 
     PIO pio = pio0;
     uint sm = 0;
