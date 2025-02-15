@@ -5,8 +5,8 @@
 #include "parallel_reader.pio.h"  // PIO assembly will be compiled into this header
 #include <stdio.h>  // Include stdio.h for printf
 
-#define SAMPLE_RATE 18000000 // for some reason 16mhz gives a real 6mhz i think its because its /3 not 2 because jmp counts as an instruction
-#define NUM_SAMPLES 1000
+#define SAMPLE_RATE 18000000 // this will be divided in 2 because the pio program has 2 instructions per sample
+#define NUM_SAMPLES 10
 
 uint8_t buffer[NUM_SAMPLES];
 

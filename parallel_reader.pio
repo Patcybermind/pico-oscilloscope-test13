@@ -2,7 +2,7 @@
 
 
 ; Read 8 bits from the parallel input and push to the RX FIFO
-loop:
+.wrap_target
     in pins, 8       
     push block       
-    jmp loop         
+.wrap
